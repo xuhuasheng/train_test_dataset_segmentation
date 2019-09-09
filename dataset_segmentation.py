@@ -9,15 +9,25 @@ import os
 import shutil
 import random
 
-ALL_DATA_PATH = '/home/watson/Documents/aug_THzDatasets/All_Data/'
+ALL_DATA_PATH = '/home/watson/Documents/mask_THzDatasets/All_Data/'
 ALL_XMLS_PATH = ALL_DATA_PATH + 'xmls/'
 ALL_IMGS_PATH = ALL_DATA_PATH + 'imgs/'
 
-OUTPUT_PATH = '/home/watson/Documents/aug_THzDatasets/'
+OUTPUT_PATH = '/home/watson/Documents/mask_THzDatasets/'
 TRAIN_PATH = OUTPUT_PATH + 'train/'
 VAL_PATH  = OUTPUT_PATH + 'val/'
 TRAIN_XMLS_PATH = OUTPUT_PATH + 'train_xmls/'
 VAL_XMLS_PATH = OUTPUT_PATH + 'val_xmls/'
+
+# 创建路径
+if not os.path.exists(TRAIN_PATH):
+    os.makedirs(TRAIN_PATH)
+if not os.path.exists(VAL_PATH):
+    os.makedirs(VAL_PATH)
+if not os.path.exists(TRAIN_XMLS_PATH):
+    os.makedirs(TRAIN_XMLS_PATH)
+if not os.path.exists(VAL_XMLS_PATH):
+    os.makedirs(VAL_XMLS_PATH)
 
 imgs_list = os.listdir(ALL_IMGS_PATH)
 xmls_list = os.listdir(ALL_XMLS_PATH)
@@ -39,7 +49,7 @@ for img_fileName in imgs_list[:trainset_num]:
     img_name = img_fileName.split('.')[0] # 去掉后缀名，获得图片名字
     
     xml_name = img_name
-    xml_fileName = xml_name + '.xml'
+    xml_fileName = xml_name + '_mask.xml'
     xml_fullFileName = os.path.join(ALL_XMLS_PATH + xml_fileName)
 
     # 判断对应xml文件是否存在
@@ -58,7 +68,7 @@ for img_fileName in imgs_list[trainset_num :]:
     img_name = img_fileName.split('.')[0] # 去掉后缀名，获得图片名字
     
     xml_name = img_name
-    xml_fileName = xml_name + '.xml'
+    xml_fileName = xml_name + '_mask.xml'
     xml_fullFileName = os.path.join(ALL_XMLS_PATH + xml_fileName)
 
     # 判断对应xml文件是否存在
